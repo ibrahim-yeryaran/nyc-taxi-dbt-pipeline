@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: dim_zones
+    description: "Taksi bölgesi dimension'ı (location_id → borough/zone)"
+    columns:
+      - name: location_id
+        description: "Bölgenin birincil anahtarı"
+        data_tests:
+          - unique          # her bölge bir kez
+          - not_null        # anahtar boş olamaz
+
+  - name: fct_trips
+    description: "Sarı taksi yolculukları fact tablosu (türetilmiş metriklerle)"
+    columns:
+      - name: trip_id
+        description: "Yolculuk surrogate key'i"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: pickup_location_id
+        description: "Biniş bölgesi — dim_zones'a foreign key"
+        data_tests:
+          # Referans bütünlüğü: her biniş bölgesi dim_zones'da MUTLAKA olmalı
+          - relationships:
+              to: ref('dim_zones')
+              field: location_id
+
+      - name: dropoff_location_id
+        description: "İniş bölgesi — dim_zones'a foreign key"
+        data_tests:
+          - relationships:
+              to: ref('dim_zones')
+              field: location_id
+
+      - name: trip_duration_minutes
+        description: "Yolculuk süresi (dakika)"
+        data_tests:
+          - not_null

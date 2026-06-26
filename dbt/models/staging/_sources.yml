@@ -1,0 +1,13 @@
+version: 2
+
+# Kaynaklar: load_raw.py'nin DuckDB'ye yüklediği ham tablolar.
+# Modellerde {{ source('raw', 'yellow_trips') }} şeklinde referans veririz.
+sources:
+  - name: raw
+    description: "load_raw.py tarafından yüklenen ham NYC Taxi verisi"
+    schema: raw
+    tables:
+      - name: yellow_trips
+        description: "Sarı taksi yolculuk kayıtları (ham, dönüştürülmemiş)"
+      - name: taxi_zones
+        description: "TLC bölge arama tablosu (LocationID → Borough/Zone)"

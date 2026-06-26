@@ -1,0 +1,22 @@
+# Veri ambarı dosyası — repoya konmaz (her klonlayan kendisi üretir)
+warehouse/*.duckdb
+warehouse/*.duckdb.wal
+
+# İndirilen ham veri dosyaları (büyük; gitignore)
+data/
+*.parquet
+
+# Python sanal ortam ve cache
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# dbt çıktıları
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/.user.yml
+
+# macOS
+.DS_Store
