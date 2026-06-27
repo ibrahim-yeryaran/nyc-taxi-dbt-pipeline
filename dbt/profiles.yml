@@ -1,11 +1,11 @@
-# dbt bağlantı ayarları. Normalde ~/.dbt/profiles.yml içinde durur ama
-# projeyle birlikte taşınması (reprodüksiyon) için burada tutuyoruz ve
-# DBT_PROFILES_DIR=. ile bu klasörü gösteriyoruz.
+# dbt connection settings. Normally these live in ~/.dbt/profiles.yml, but we
+# keep them here so they travel with the project (reproducibility) and point at
+# this folder via DBT_PROFILES_DIR=.
 nyc_taxi:
   target: dev
   outputs:
     dev:
       type: duckdb
-      # Ambar dosyası dbt klasörünün bir üstündeki warehouse/ içinde
+      # Warehouse file lives in warehouse/ one level above the dbt folder
       path: "../warehouse/nyc_taxi.duckdb"
       threads: 4

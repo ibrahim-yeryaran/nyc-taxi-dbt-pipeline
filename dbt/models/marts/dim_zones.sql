@@ -1,5 +1,5 @@
--- Dimension: taksi bölgeleri. Her bölge için tanımlayıcı özellikler.
--- fct_trips bu tabloya location_id üzerinden bağlanır (yıldız şeması).
+-- Dimension: taxi zones. Descriptive attributes for each zone.
+-- fct_trips joins to this table via location_id (star schema).
 
 with zones as (
 
@@ -8,7 +8,7 @@ with zones as (
 )
 
 select
-    location_id,        -- birincil anahtar (fct_trips buraya FK ile bağlanır)
+    location_id,        -- primary key (fct_trips links here via FK)
     borough,
     zone_name,
     service_zone

@@ -1,4 +1,4 @@
--- Staging: bölge arama tablosunu temizler/standartlaştırır.
+-- Staging: cleans/standardizes the zone lookup table.
 
 with source as (
 

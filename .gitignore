@@ -1,18 +1,18 @@
-# Veri ambarı dosyası — repoya konmaz (her klonlayan kendisi üretir)
+# Warehouse file — not committed (each clone regenerates it)
 warehouse/*.duckdb
 warehouse/*.duckdb.wal
 
-# İndirilen ham veri dosyaları (büyük; gitignore)
+# Downloaded raw data files (large; gitignored)
 data/
 *.parquet
 
-# Python sanal ortam ve cache
+# Python virtual environment and cache
 .venv/
 venv/
 __pycache__/
 *.pyc
 
-# dbt çıktıları
+# dbt outputs
 dbt/target/
 dbt/dbt_packages/
 dbt/logs/

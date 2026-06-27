@@ -1,5 +1,5 @@
--- Fact: her satır bir taksi yolculuğu. Ölçümler (measures) ve dimension'lara
--- foreign key'ler burada. Türetilmiş metrikler de bu katmanda hesaplanır.
+-- Fact: each row is one taxi trip. Measures and foreign keys to dimensions
+-- live here. Derived metrics are also computed in this layer.
 
 with trips as (
 
@@ -10,27 +10,27 @@ with trips as (
 final as (
 
     select
-        -- Surrogate key: doğal anahtar olmadığı için satır numarası üretiyoruz.
-        -- (table olarak materyalize edildiği için deterministik ve benzersiz.)
+        -- Surrogate key: no natural key exists, so we generate a row number.
+        -- (Deterministic and unique because it's materialized as a table.)
         row_number() over (order by pickup_at, dropoff_at) as trip_id,
 
         vendor_id,
         pickup_at,
         dropoff_at,
 
-        -- Türetilmiş metrik: yolculuk süresi (dakika)
+        -- Derived metric: trip duration (minutes)
         date_diff('second', pickup_at, dropoff_at) / 60.0 as trip_duration_minutes,
 
         passenger_count,
         trip_distance_miles,
 
-        -- Türetilmiş metrik: ortalama hız (mil/saat). Sıfıra bölmeye karşı korumalı.
+        -- Derived metric: average speed (mph). Guarded against divide-by-zero.
         case
             when date_diff('second', pickup_at, dropoff_at) > 0
             then trip_distance_miles / (date_diff('second', pickup_at, dropoff_at) / 3600.0)
         end as average_speed_mph,
 
-        -- Dimension'lara foreign key'ler
+        -- Foreign keys to dimensions
         pickup_location_id,
         dropoff_location_id,
 
@@ -39,7 +39,7 @@ final as (
         tip_amount,
         total_amount,
 
-        -- Türetilmiş metrik: bahşiş oranı (ücrete göre)
+        -- Derived metric: tip ratio (relative to fare)
         case
             when fare_amount > 0 then tip_amount / fare_amount
         end as tip_pct,

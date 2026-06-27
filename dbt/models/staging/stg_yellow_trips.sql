@@ -1,7 +1,7 @@
--- Staging: ham yolculuk verisini temizler ve standartlaştırır.
---  * kolon isimlerini okunabilir snake_case'e çevirir
---  * tipleri netleştirir
---  * bariz hatalı satırları eler (negatif tutar/mesafe, ters tarih)
+-- Staging: cleans and standardizes the raw trip data.
+--  * renames columns to readable snake_case
+--  * makes types explicit
+--  * drops obviously bad rows (negative amount/distance, reversed dates)
 
 with source as (
 
@@ -27,7 +27,7 @@ cleaned as (
 
     from source
 
-    -- Temel veri kalitesi filtreleri
+    -- Basic data-quality filters
     where tpep_pickup_datetime < tpep_dropoff_datetime
       and trip_distance >= 0
       and total_amount >= 0

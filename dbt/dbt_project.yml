@@ -2,23 +2,23 @@ name: 'nyc_taxi'
 version: '1.0.0'
 config-version: 2
 
-# Hangi profili (bağlantı ayarlarını) kullanacağı — profiles.yml'deki isimle eşleşir
+# Which profile (connection settings) to use — matches the name in profiles.yml
 profile: 'nyc_taxi'
 
-# Klasör yolları
+# Folder paths
 model-paths: ["models"]
 seed-paths: ["seeds"]
 test-paths: ["tests"]
 macro-paths: ["macros"]
 
-target-path: "target"      # derlenen SQL ve artefaktlar buraya yazılır (gitignore'lu)
+target-path: "target"      # compiled SQL and artifacts are written here (gitignored)
 clean-targets:
   - "target"
   - "dbt_packages"
 
-# Katman bazında varsayılan materyalizasyon:
-#  - staging: hafif/ucuz olduğu için view
-#  - marts:   sık sorgulandığı için table (kalıcı, hızlı)
+# Default materialization per layer:
+#  - staging: view (lightweight/cheap)
+#  - marts:   table (queried often, so persistent and fast)
 models:
   nyc_taxi:
     staging:
