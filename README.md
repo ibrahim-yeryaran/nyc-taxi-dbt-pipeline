@@ -1,5 +1,7 @@
 # 🚕 NYC Taxi — ELT Pipeline with dbt & DuckDB
 
+[![CI](https://github.com/ibrahim-yeryaran/nyc-taxi-dbt-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/ibrahim-yeryaran/nyc-taxi-dbt-pipeline/actions/workflows/ci.yml)
+
 An end-to-end **ELT pipeline** that loads millions of real NYC taxi trips into a
 **DuckDB** warehouse and transforms them into a tested, documented **star schema**
 using **dbt** — the modern analytics-engineering workflow.
